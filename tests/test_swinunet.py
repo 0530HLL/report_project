@@ -10,24 +10,22 @@ from swin_transformer_unet_skip_expand_decoder_sys import SwinTransformerSys
 
 @pytest.fixture
 def model_config():
-    """モデルの基本設定
-    テストを高速化するため、層の深さや埋め込み次元を小さくしています。
-    """
+    # SwinUnetのモデルの基本設定
     return {
         'img_size': 224,
         'patch_size': 4,
         'in_chans': 3,
         'num_classes': 3,
         'embed_dim': 96,
-        'depths': [2, 2, 2],         
-        'depths_decoder': [1, 2, 2],
-        'num_heads': [3, 6, 12],
+        'depths': [2, 2, 2, 2],         
+        'depths_decoder': [1, 2, 2, 2],
+        'num_heads': [3, 6, 12, 24],
         'window_size': 7
     }
 
 @pytest.fixture
 def model(model_config):
-    """モデルのインスタンス化"""
+    # モデルのインスタンス化
     return SwinTransformerSys(**model_config)
 
 def test_forward_output_shape(model, model_config):
@@ -82,7 +80,7 @@ def test_dimension_mismatch(model_config):
     # インスタンス化
     model = SwinTransformerSys(**model_config)
     
-    # 225は 4(patch)の倍数ではないのでエラーになるはず
+    # 225は 4(patch)の倍数ではないのでエラーになるはずである
     invalid_size = 225
     inputs = torch.randn(1, 3, invalid_size, invalid_size)
     
