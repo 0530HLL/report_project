@@ -9,7 +9,7 @@ https://github.com/HuCaoFighting/Swin-Unet/blob/main/networks/swin_transformer_u
 ・元コードではrequirements.txtで管理されていたパッケージ管理をuvによるパッケージ管理に変更<br>
 ・元コードに型ヒントを追加<br>
 ・元コードを対象としたpytestによるテストコード「tests/test_swinunet.py」を追加<br>
-・pytestによるテストコードを実行したときに出る warning を解消するために元コードを<br>
+・pytestによるテストコードを実行したときに出る warning を解消するために元コードを修正<br>
 
 ファイルの説明:<br>
 ・「src/swin_transformer_unet_skip_expand_decoder_sys.py」 ・・・  元コード https://github.com/HuCaoFighting/Swin-Unet/blob/main/networks/swin_transformer_unet_skip_expand_decoder_sys.py の修正後コード<br>
