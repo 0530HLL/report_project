@@ -1,5 +1,16 @@
 # report_project
 課題共有用に作成
-「src/swin_transformer_unet_skip_expand_decoder_sys.py」は
-            https://github.com/HuCaoFighting/Swin-Unet/blob/main/networks/swin_transformer_unet_skip_expand_decoder_sys.py
-のコードに型ヒントおよびpytestによるテストコードを追加した。
+
+課題設定:
+https://github.com/HuCaoFighting/Swin-Unet/blob/main/networks/swin_transformer_unet_skip_expand_decoder_sys.py
+の元コードを対象に「uvによるパッケージ管理」「型ヒントの追加」「pytestによるテスト追加」を行った。
+
+作業内容:
+・元コードではrequirements.txtで管理されていたパッケージ管理をuvによるパッケージ管理に変更
+・元コードに型ヒントを追加
+・元コードを対象としたpytestによるテストコード「tests/test_swinunet.py」を追加
+・pytestによるテストコードを実行したときに出る warning を解消するために元コードを
+
+ファイルの説明:
+・「src/swin_transformer_unet_skip_expand_decoder_sys.py」 ・・・  元コード https://github.com/HuCaoFighting/Swin-Unet/blob/main/networks/swin_transformer_unet_skip_expand_decoder_sys.py の修正後コード
+・「tests/test_swinunet.py」 ・・・  pytestによるテストコード
