@@ -2,8 +2,13 @@ import torch
 import torch.nn as nn
 import torch.utils.checkpoint as checkpoint
 from einops import rearrange
-from timm.models.layers import DropPath, to_2tuple, trunc_normal_
 from typing import List, Tuple, Optional, Union, Type
+
+# from timm.models.layers import DropPath, to_2tuple, trunc_normal_
+# pytestでwarningが出るため以下の書き方に変更
+from timm.layers import DropPath, to_2tuple, trunc_normal_
+
+
 
 class MoEFFNGating(nn.Module):
     def __init__(self, dim: int, hidden_dim: int, num_experts: int):
@@ -120,7 +125,11 @@ class WindowAttention(nn.Module):
         # get pair-wise relative position index for each token inside the window
         coords_h = torch.arange(self.window_size[0])
         coords_w = torch.arange(self.window_size[1])
-        coords = torch.stack(torch.meshgrid([coords_h, coords_w]))  # 2, Wh, Ww
+
+        # coords = torch.stack(torch.meshgrid([coords_h, coords_w]))  # 2, Wh, Ww
+        # pytestでwarningが出るため以下の書き方に変更
+        coords = torch.stack(torch.meshgrid([coords_h, coords_w], indexing="ij"))  # 2, Wh, Ww
+
         coords_flatten = torch.flatten(coords, 1)  # 2, Wh*Ww
         relative_coords = coords_flatten[:, :, None] - coords_flatten[:, None, :]  # 2, Wh*Ww, Wh*Ww
         relative_coords = relative_coords.permute(1, 2, 0).contiguous()  # Wh*Ww, Wh*Ww, 2
